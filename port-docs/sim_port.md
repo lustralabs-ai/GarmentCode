@@ -1,6 +1,6 @@
 # warp.sim / warp.collision port: GarmentCode fork (1.0.0-beta.6) -> Warp 1.13.0+rocm.0
 
-Workstream 6. Branch `ws6-sim-port` in worktree `/home/carl/lustra/GarmentCode_hack/warp-ws6`,
+Workstream 6. Branch `ws6-sim-port` in worktree `$WS/warp-ws6`,
 based on `garmentcode-rocm`, with `ws5-mesh-query-edge` merged in.
 Fork source: NvidiaWarp-GarmentCode `garmentcode_hack` (base `97aba17a1`), read-only.
 
@@ -246,10 +246,10 @@ It also has an optional, environment-gated `GC_STATIC_COPY=1` shim, described be
 Environment (all commands):
 ```bash
 export ROCM_PATH=/home/carl/py/lib/python3.12/site-packages/_rocm_sdk_devel LD_LIBRARY_PATH=$ROCM_PATH/lib
-export PYTHONPATH=/home/carl/lustra/GarmentCode_hack/warp-ws6 WARP_CACHE_PATH=/tmp/claude-1000/warp-cache-ws6 \
+export PYTHONPATH=$WS/warp-ws6 WARP_CACHE_PATH=/tmp/claude-1000/warp-cache-ws6 \
        MPLCONFIGDIR=/tmp/claude-1000/mpl PYTHONDONTWRITEBYTECODE=1
-PY=/home/carl/lustra/GarmentCode_hack/venv-gc/bin/python     # (= /tmp/claude-1000/ws6/env.sh)
-R=/home/carl/lustra/GarmentCode_hack/reference
+PY=$WS/venv-gc/bin/python     # (= /tmp/claude-1000/ws6/env.sh)
+R=$WS/reference
 ```
 Native build (after merging ws5):
 ```bash

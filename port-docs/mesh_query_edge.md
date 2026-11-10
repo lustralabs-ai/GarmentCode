@@ -106,7 +106,7 @@ Mutation check: with exclusion of `v2` removed, the brute-force tests fail on bo
 ### Commands
 
 ```
-cd /home/carl/lustra/GarmentCode_hack/warp-ws5
+cd $WS/warp-ws5
 export PATH=/home/carl/py/bin:$PATH
 export ROCM_PATH=/home/carl/py/lib/python3.12/site-packages/_rocm_sdk_devel
 export LD_LIBRARY_PATH=$ROCM_PATH/lib WARP_CACHE_PATH=/tmp/claude-1000/warp-cache-ws5

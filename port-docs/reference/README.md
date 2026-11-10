@@ -71,7 +71,7 @@ dress_pencil (434 self-intersections) - compare its intersection count relativel
 ## Commands (reproducing what was run here)
 
 ```
-cd /home/carl/lustra/GarmentCode_hack
+cd $WS
 source venv-ref/bin/activate
 export WARP_CACHE_PATH=/tmp/claude-1000/warp-cache-ws3 MPLCONFIGDIR=/tmp/claude-1000/mpl
 GC=$PWD/GarmentCode; R=$PWD/reference
@@ -97,7 +97,7 @@ dir as `sim_props.yaml`). No pattern generation or meshing is redone; body mesh,
 The harness imports `pygarment` from `--garmentcode-dir` and `warp` from the active environment (use the ported Warp's venv).
 
 ## Environment (reference build)
-Python 3.10.22, numpy 1.26.4, warp-lang 1.0.0b6 (editable from `/home/carl/lustra/GarmentCode_hack/warp-ref-cpu`,
+Python 3.10.22, numpy 1.26.4, warp-lang 1.0.0b6 (editable from `$WS/warp-ref-cpu`,
 a worktree of `garmentcode_hack` @ 63baf6855, built CPU-only: `python build_lib.py` with no CUDA_HOME;
 `tools/packman/{packman,python.sh}` needed chmod +x), venv `venv-ref` (uv; `data/ref_venv_freeze.txt`),
 GCC (system), LLVM from packman `clang+llvm-warp 15.0.7`. Machine: Linux 6.17, AMD Ryzen AI MAX+ 395. No NVIDIA driver.
@@ -125,7 +125,7 @@ Packages installed for GarmentCode: pyyaml scipy svgwrite svgpathtools psutil ma
 ## Run on alcyone when it is back (nothing below has been run)
 ```
 # on alcyone: reuse ~/gch/venv and ~/gch/GarmentCode (do not modify); copy this reference/ dir over (scripts + data/inputs)
-rsync -a /home/carl/lustra/GarmentCode_hack/reference/{scripts,data/inputs} alcyone:~/gch/ref/   # keep layout: ~/gch/ref/scripts, ~/gch/ref/data/inputs
+rsync -a $WS/reference/{scripts,data/inputs} alcyone:~/gch/ref/   # keep layout: ~/gch/ref/scripts, ~/gch/ref/data/inputs
 ssh alcyone
 cd ~/gch/ref; source ~/gch/venv/bin/activate
 export WARP_CACHE_PATH=$HOME/gch/ref/warpcache MPLCONFIGDIR=$HOME/gch/ref/mpl

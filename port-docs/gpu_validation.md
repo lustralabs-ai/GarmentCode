@@ -31,9 +31,9 @@ Environment:
 export ROCM_PATH=/home/carl/py/lib/python3.12/site-packages/_rocm_sdk_devel
 export LD_LIBRARY_PATH=$ROCM_PATH/lib MPLCONFIGDIR=/tmp/claude-1000/mpl
 export WARP_CACHE_PATH=/tmp/claude-1000/warp-cache-ws8
-PY=/home/carl/lustra/GarmentCode_hack/venv-gc/bin/python
-GC=/home/carl/lustra/GarmentCode_hack/GarmentCode
-R=/home/carl/lustra/GarmentCode_hack/reference
+PY=$WS/venv-gc/bin/python
+GC=$WS/GarmentCode
+R=$WS/reference
 S=$R/scripts; I=$R/data/inputs
 ```
 

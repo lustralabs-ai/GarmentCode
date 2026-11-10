@@ -20,7 +20,7 @@ Python 3.12 works for every dependency (local_env.md). Alcyone's reference insta
 ## 2. One-command setup
 
 ```
-cd /home/carl/lustra/GarmentCode_hack
+cd $WS
 port-docs/scripts/setup_amd.sh \
     --rocm-path /home/carl/py/lib/python3.12/site-packages/_rocm_sdk_devel \
     --warp-dir  $PWD/warp-amd-probe \
@@ -77,7 +77,7 @@ HIPRTC prints "does not support precompiled headers" once per module; harmless (
 ## 4. Manual equivalent of each step
 
 ```
-S=/home/carl/lustra/GarmentCode_hack
+S=$WS
 ROCM=/home/carl/py/lib/python3.12/site-packages/_rocm_sdk_devel
 
 # 2. venv

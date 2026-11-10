@@ -45,14 +45,19 @@ alcyone CUDA baseline (shirt: 222 frames, 0 body intersections, 10 self-intersec
 
 ## Layout
 
-| Path | Purpose |
+`$WS` in these docs is the workspace directory that holds the checkouts side by side
+(originally `/home/carl/lustra/GarmentCode_hack`).
+
+| Path under `$WS` | Purpose |
 |---|---|
-| `warp-amd-probe/` | Integration worktree, branch `garmentcode-rocm`; its `.venv` is for Warp tests only |
+| `GarmentCode/` | Application; our fork, branch `amd-rocm`. Holds these docs in `port-docs/` |
+| `GarmentCode/port-docs/reference/` | Comparison/validation harness (scripts, README) |
+| `warp-amd-probe/` | Warp checkout, branch `garmentcode-rocm` (the port); its `.venv` is for Warp tests only |
+| `NvidiaWarp-GarmentCode/` | Original Warp fork (`garmentcode_hack`, beta.6), reference only |
+| `warp-ref-cpu/`, `venv-ref/` | CPU-only build of the original fork and its venv, for bit-exact comparison |
 | `venv-gc/` | GarmentCode environment (see `SETUP.md`, `scripts/setup_amd.sh`) |
-| `NvidiaWarp-GarmentCode/` | Original fork (`garmentcode_hack`), reference only |
-| `GarmentCode/` | Application |
-| `port-docs/` | This plan, API-drift cheat sheet, test triage |
-| `reference/` | Golden data and comparison scripts from alcyone |
+| `reference/data/` | Reference inputs and CPU runs (414 MB, not in git) |
+| `port-docs`, `reference/scripts` | Symlinks into `GarmentCode/port-docs` for older commands |
 
 Build / run environment for Warp on this machine:
 

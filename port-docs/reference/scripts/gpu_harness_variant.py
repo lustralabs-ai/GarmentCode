@@ -35,6 +35,6 @@ if "--bvh" in opts:
 
 harness = os.environ.get("DUMP_HARNESS", os.path.join(here, "dump_harness.py"))
 if not os.path.exists(harness):
-    harness = "/home/carl/lustra/GarmentCode_hack/reference/scripts/dump_harness.py"
+    harness = os.path.join(here, "dump_harness.py")
 sys.argv = [harness] + rest
 runpy.run_path(harness, run_name="__main__")

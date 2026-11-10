@@ -7,7 +7,7 @@ Versions are simply what resolved today from PyPI against GarmentCode's `setup.c
 ## Recreate venv-gc
 
 ```
-cd /home/carl/lustra/GarmentCode_hack
+cd $WS
 export UV_HTTP_TIMEOUT=600
 /home/carl/py/bin/uv venv --python 3.12 venv-gc
 /home/carl/py/bin/uv pip install --python venv-gc/bin/python "numpy<2" scipy pyyaml svgwrite svgpathtools \
@@ -15,8 +15,8 @@ export UV_HTTP_TIMEOUT=600
 /home/carl/py/bin/uv pip install --python venv-gc/bin/python "pyopengl==3.1.9"     # see "Differences"
 # path files instead of editable installs (nothing written into the checkouts):
 SP=venv-gc/lib/python3.12/site-packages
-echo /home/carl/lustra/GarmentCode_hack/warp-amd-probe > $SP/warp-amd-probe.pth
-echo /home/carl/lustra/GarmentCode_hack/GarmentCode    > $SP/garmentcode-root.pth
+echo $WS/warp-amd-probe > $SP/warp-amd-probe.pth
+echo $WS/GarmentCode    > $SP/garmentcode-root.pth
 ```
 Full resolved list: `port-docs/venv-gc-freeze.txt`. Python 3.12 worked for every dependency (incl. cgal 6.0.1 and
 libigl 2.6.3 wheels), so no fallback to 3.10 was needed.
@@ -45,7 +45,7 @@ export MPLCONFIGDIR=/tmp/claude-1000/mpl                     # ~/.config/matplot
 export PYTHONDONTWRITEBYTECODE=1                             # optional, keeps checkouts clean
 ```
 pythonrender.py sets `PYOPENGL_PLATFORM=egl` itself on Linux; no need to export it.
-Run with `/home/carl/lustra/GarmentCode_hack/venv-gc/bin/python`, cwd `GarmentCode/`.
+Run with `$WS/venv-gc/bin/python`, cwd `GarmentCode/`.
 (Note: a GUI-stub run before I exported WARP_CACHE_PATH created `~/.cache/warp/`; safe to delete.)
 
 ## system.json (GarmentCode/system.json, git-ignored; workstream 3 may read it)
