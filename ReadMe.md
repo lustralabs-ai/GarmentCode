@@ -1,5 +1,25 @@
 # GarmentCode: Programming Parametric Sewing Patterns
 
+> [!WARNING]
+> **This is a locally modified, experimental copy of GarmentCode — not the official release.**
+> It has been patched to run its cloth simulation on an AMD Radeon 8060S (ROCm/HIP) using a port of the
+> GarmentCode Warp fork to Warp 1.13 (branch `garmentcode-rocm` of our Warp fork) instead of
+> [NvidiaWarp-GarmentCode](https://github.com/maria-korosteleva/NvidiaWarp-GarmentCode). Changes relative to upstream
+> [maria-korosteleva/GarmentCode](https://github.com/maria-korosteleva/GarmentCode) `d449629`:
+>
+> - **NumPy 2 support**: 2-D `np.cross` calls replaced by a `cross_2d` helper (`pygarment/pattern/{utils,core}.py`,
+>   `pygarment/garmentcode/{utils,operators}.py`); `np.infty` alias restored for pyrender
+>   (`pygarment/meshgen/render/pythonrender.py`); `numpy<2` pin dropped in `setup.cfg`.
+> - **Warp 1.13**: `pygarment/data_config.py` no longer touches `warp.context.runtime`.
+>
+> The installation instructions below (NVIDIA GPU, NvidiaWarp-GarmentCode) do **not** describe this setup.
+> Use [`port-docs/SETUP.md`](port-docs/SETUP.md) and `port-docs/scripts/setup_amd.sh` instead.
+> [`port-docs/PLAN.md`](port-docs/PLAN.md) gives the overview of the port and its status; `gpu_validation.md` and
+> `batch_validation.md` there hold the validation results, and `port-docs/reference/` the comparison harness.
+> Known differences in behaviour: results differ from NVIDIA runs at
+> the level of the simulation's own run-to-run chaos; box-mesh vertex counts can differ slightly between NumPy 1 and 2;
+> the GUI and `pattern_fitter.py` are untested in this configuration.
+
 ![Examples of garments sampled from GarmentCode configurator](https://github.com/maria-korosteleva/GarmentCode/raw/main/assets/img/header.png)
 
 Official Implementation of [GarmentCode: Programming Parametric Sewing Patterns](https://igl.ethz.ch/projects/garmentcode/) and [GarmentCodeData: A Dataset of 3D Made-to-Measure Garments With Sewing Patterns](https://igl.ethz.ch/projects/GarmentCodeData/).
