@@ -3,6 +3,10 @@ import platform
 if platform.system() == 'Linux':
     os.environ["PYOPENGL_PLATFORM"] = "egl"
 import numpy as np
+if not hasattr(np, 'infty'):
+    # pyrender 0.1.45 (pyrender/mesh.py, Mesh.bounds of an empty mesh) still uses
+    # np.infty, which NumPy 2 removed
+    np.infty = np.inf
 import trimesh
 import pyrender
 from PIL import Image

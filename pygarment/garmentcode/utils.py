@@ -26,13 +26,19 @@ class KeyWrapper(Generic[T, V]):
         return len(self.it)
 
 
+def cross_2d(v1, v2):
+    """Z component of the cross product of two 2D vectors
+        (np.cross no longer accepts 2D vectors in NumPy 2)"""
+    return v1[0] * v2[1] - v1[1] * v2[0]
+
+
 def vector_angle(v1, v2):
     """Find an angle between two 2D vectors"""
     v1, v2 = np.asarray(v1), np.asarray(v2)
     cos = np.dot(v1, v2) / (norm(v1) * norm(v2))
     angle = np.arccos(cos) 
     # Cross to indicate correct relative orienataion of v2 w.r.t. v1
-    cross = np.cross(v1, v2)
+    cross = cross_2d(v1, v2)
     
     if abs(cross) > 1e-5:
         angle *= np.sign(cross)

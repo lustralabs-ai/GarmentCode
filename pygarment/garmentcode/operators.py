@@ -10,7 +10,7 @@ import svgpathtools as svgpath
 from pygarment.garmentcode.edge import Edge, CurveEdge, EdgeSequence, ILENGTH_S_TOL
 from pygarment.garmentcode.interface import Interface
 from pygarment.garmentcode.utils import vector_angle, close_enough, c_to_list, c_to_np
-from pygarment.garmentcode.utils import list_to_c
+from pygarment.garmentcode.utils import list_to_c, cross_2d
 from pygarment.garmentcode.base import BaseComponent
 
 
@@ -289,7 +289,7 @@ def cut_into_edge_single(target_shape, base_edge: Edge, offset=0, right=True,
 
     # Check orientation 
     avg_vertex = np.asarray(new_edges.verts()).mean(0)
-    right_position = np.sign(np.cross(insert_vector, avg_vertex - np.asarray(new_edges[0].start))) == -1 
+    right_position = np.sign(cross_2d(insert_vector, avg_vertex - np.asarray(new_edges[0].start))) == -1 
     if not right and right_position or right and not right_position:
         # flip shape to match the requested direction
         new_edges.reflect(new_edges[0].start, new_edges[-1].end)  

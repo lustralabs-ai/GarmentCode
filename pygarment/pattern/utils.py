@@ -13,6 +13,12 @@ def c_to_np(num):
     """Convert complex number to a numpy array of 2 elements"""
     return np.asarray([num.real, num.imag])
 
+def cross_2d(v1, v2):
+    """Z component of the cross product of two 2D vectors
+        (np.cross no longer accepts 2D vectors in NumPy 2)"""
+    return v1[0] * v2[1] - v1[1] * v2[0]
+
+
 def vector_angle(v1, v2):
     """Find an angle between two 2D vectors"""
     v1, v2 = np.asarray(v1), np.asarray(v2)
@@ -20,7 +26,7 @@ def vector_angle(v1, v2):
     cos = max(min(cos, 1), -1)  # NOTE: getting rid of numbers like 1.000002 that appear due to numerical instability
     angle = np.arccos(cos) 
     # Cross to indicate correct relative orienataion of v2 w.r.t. v1
-    cross = np.cross(v1, v2)
+    cross = cross_2d(v1, v2)
     
     if abs(cross) > 1e-5:
         angle *= np.sign(cross)
@@ -80,6 +86,6 @@ def abs_to_rel_2d(start, end, abs_point, as_vector=False):
     rel_point[1] = np.linalg.norm(vert_comp) / edge_len
 
     # Distinguish left&right curvature
-    rel_point[1] *= np.sign(np.cross(edge_vec, point_vec))
+    rel_point[1] *= np.sign(cross_2d(edge_vec, point_vec))
 
     return np.asarray(rel_point)

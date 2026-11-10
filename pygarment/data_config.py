@@ -299,11 +299,10 @@ class Properties():
 
         try: 
             import warp   # Optional section
-            if warp.context.runtime is None:
-                # runtime = warp.context.Runtime()
-                warp.init()
-            else:
-                print(f'{self.__class__.__name__}::INFO::Saving GPU info -- warp already initialized')
+            # warp.init() does nothing if warp is already initialized. (The old
+            # check of warp.context.runtime fails on Warp >= 1.10, where
+            # warp.context is no longer public.)
+            warp.init()
             curr_device = warp.get_device()   
             self.properties['system_info']['GPU'] = curr_device.name if curr_device.is_cuda else 'Not used'
         except ImportError:
