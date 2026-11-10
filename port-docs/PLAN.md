@@ -52,10 +52,9 @@ alcyone CUDA baseline (shirt: 222 frames, 0 body intersections, 10 self-intersec
 |---|---|
 | `GarmentCode/` | Application; our fork, branch `amd-rocm`. Holds these docs in `port-docs/` |
 | `GarmentCode/port-docs/reference/` | Comparison/validation harness (scripts, README) |
-| `warp-amd-probe/` | Warp checkout, branch `garmentcode-rocm` (the port); its `.venv` is for Warp tests only |
-| `NvidiaWarp-GarmentCode/` | Original Warp fork (`garmentcode_hack`, beta.6), reference only |
-| `warp-ref-cpu/`, `venv-ref/` | CPU-only build of the original fork and its venv, for bit-exact comparison |
-| `venv-gc/` | GarmentCode environment (see `SETUP.md`, `scripts/setup_amd.sh`) |
+| `NvidiaWarp-GarmentCode/` | Warp checkout, branch `garmentcode-rocm` (the port). Earlier docs call this `warp-amd-probe/` |
+| `venv-ref/` | venv of the CPU-only beta.6 reference build (the build itself, `warp-ref-cpu/`, was removed) |
+| `venv-gc/` | GarmentCode environment (see `SETUP.md`, `scripts/setup_amd.sh`); removed, the runs since use `/home/carl/py` |
 | `reference/data/` | Reference inputs and CPU runs (414 MB, not in git) |
 | `port-docs`, `reference/scripts` | Symlinks into `GarmentCode/port-docs` for older commands |
 
@@ -124,6 +123,12 @@ Never install into `/home/carl/py` (user's venv). Each agent uses its own
 - 2026-11-10: stream 9a done: `SETUP.md` + `scripts/setup_amd.sh`, clean from-scratch run passed.
   `local_env.md` sections on missing `warp.sim` are now stale (see `SETUP.md` section 8).
   GarmentCode `data_config.py` patched (uncommitted) to call `warp.init()` directly.
+- 2026-11-10: `create_self_edge_contacts` hotspot fixed on Warp branch `edge-contact-opt`: the
+  duplicate-edge scan now runs only for accepted contacts (was O(k^2) per thread). Output is
+  unchanged: CPU bit-identical to the reference over the full shirt drape. GPU kernel total over
+  120 frames: shirt 7116 -> 191 ms, jumpsuit 13206 -> 490 ms; jumpsuit frame 0 5171 -> 60 ms,
+  frames 1-39 median 149 -> 17 ms, steady 18.7 -> 14.7 ms. Full GPU drapes (sim only, warm):
+  shirt 231 frames at 6.3 ms, dress 784 at 8.8 ms, jumpsuit 464 at 13.2 ms.
 - Decided by user: internal use only, so licensing and commit sign-off are not concerns for now.
 - Open:
   `ray_hit` panel-assignment strategy unported (unused by GarmentCode).
