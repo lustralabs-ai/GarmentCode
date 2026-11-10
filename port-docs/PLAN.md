@@ -116,7 +116,11 @@ Never install into `/home/carl/py` (user's venv). Each agent uses its own
   `create_self_edge_contacts`. Cold compile ~110 s. No Warp changes were needed.
 - 2026-11-10: GarmentCode patched for NumPy 2 (uncommitted): `cross_2d` replaces 2-D `np.cross`,
   `np.infty` shim for pyrender, pin dropped. `venv-gc` is on numpy 2.5.4; GPU re-validation passed.
-- 2026-11-10: stream 9b running: ~40-garment GPU batch with per-stage timings (`batch_validation.md`).
+- 2026-11-10: stream 9b done (`batch_validation.md`). 40 random garments on the GPU, seed 20261110:
+  31 pass / 9 flagged after GarmentCode's resim (3 are meshing failures that also fail on the
+  NumPy 1 reference env), 0 crashes. Per garment, first attempt, warm cache: median 17.4 s,
+  p90 58.7 s; steady-state median 10.4 ms/frame. `create_self_edge_contacts` dominates GPU time
+  in both the early frames (93-98 %) and steady state on large garments (54-80 %).
 - 2026-11-10: stream 9a done: `SETUP.md` + `scripts/setup_amd.sh`, clean from-scratch run passed.
   `local_env.md` sections on missing `warp.sim` are now stale (see `SETUP.md` section 8).
   GarmentCode `data_config.py` patched (uncommitted) to call `warp.init()` directly.
